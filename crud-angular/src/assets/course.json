@@ -1,0 +1,11 @@
+[
+  {
+    "_id": "1", "name": "Angular", "category": "front-end"
+  },
+  {
+    "_id": "2", "name": "Angular.JS", "category": "back-end"
+  },
+  {
+    "_id": "3", "name": "JavaScript", "category": "full stack"
+  }
+]
