@@ -8,7 +8,11 @@ import { delay, first, tap } from 'rxjs';
 })
 export class CoursesCrudService {
 
-  private readonly API = '../../../assets/course.json';
+  // Verificar o CORS para permitir a leitura da API de domínio diferente
+  // Usa-se um proxy para "igualar" os domínios
+  // Ver o arquivo proxy.conf.js
+
+  private readonly API = 'api/courses';
 
   constructor(private httpClient: HttpClient) {
 

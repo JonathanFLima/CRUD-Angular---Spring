@@ -14,7 +14,7 @@ export class CoursesComponent {
   // Também é possível inicializar a variável dentro do construtor com this.courses = []
   // O símbolo $ na variável indica que ela é um Observable.
   courses$: Observable<Course[]>;
-  displayedColumns = ['name', 'category'];
+  displayedColumns = ['_id', 'name', 'category'];
 
   // Construtor inicializa a variável coursesService com um serviço importado, onde
   // ocorrerá a leitura dos dados.
