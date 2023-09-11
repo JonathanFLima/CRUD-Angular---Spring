@@ -1,0 +1,42 @@
+<mat-card>
+  <mat-card-content class="min-width">
+    <mat-toolbar color="primary">
+      <span>Adicionar um curso</span>
+    </mat-toolbar>
+
+    <form [formGroup]="form" class="min-width">
+      <!-- Campo NOME -->
+      <mat-form-field
+        style="margin-top: 10px; margin-right: 10px"
+        appearance="outline"
+        class="full-width"
+      >
+        <mat-label>Curso</mat-label>
+        <input matInput placeholder="Nome do curso" formControlName="name" />
+      </mat-form-field>
+
+      <!-- Campo CATEGORIA -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Categoria</mat-label>
+
+        <mat-select formControlName="category">
+          <mat-option value="null"></mat-option>
+          <mat-option value="front-end">Front-End</mat-option>
+          <mat-option value="back-end">Back-End</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        style="margin-right: 10px"
+        (click)="onSubmit()"
+      >
+        ADICIONAR CURSO
+      </button>
+      <button mat-raised-button (click)="onCancel()">Cancelar</button>
+    </mat-card-actions>
+  </mat-card-content>
+</mat-card>

@@ -19,3 +19,17 @@ mat-card {
   display: flex;
   align-items: center;
 }
+
+.add-course-button {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+
+  height: 90px;
+  width: 90px;
+}
+
+mat-mini-fab {
+  width: 10%;
+  height: 10%;
+}

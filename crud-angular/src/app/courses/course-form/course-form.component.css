@@ -1,0 +1,25 @@
+mat-card {
+  max-width: 50%;
+  margin: 2em auto;
+  text-align: center;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.min-width {
+  width: 100%;
+  min-width: 150px;
+}
+
+form {
+  padding: 10px;
+}
+
+
