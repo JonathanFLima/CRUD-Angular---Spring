@@ -1,8 +1,13 @@
 mat-card {
-  width: 50%;
-  margin: auto;
-  margin-top: 30px;
+  max-width: 50%;
+  margin: 2em auto;
+  text-align: center;
+}
 
+.column-flex {
+  display: flex;
+  flex-direction: column;
+  min-width: 300px;
 }
 
 .spinner {

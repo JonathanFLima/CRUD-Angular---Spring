@@ -1,81 +1,35 @@
 <mat-card>
-  <mat-card-content>
+  <mat-card-content class="mat-elevation-z8 column-flex">
     <mat-toolbar color="primary">
       <span>Cursos disponíveis</span>
     </mat-toolbar>
 
     <!-- O Angular checa se a lista courses recebeu os dados ou não. Caso não, ele usa o elemento do Spinner -->
     <!-- Caso tenha recebido ela aloca na variável local "courses", que será lida pelo dataSource -->
-    <div *ngIf="courses$ | async as courses; else loading">
-    <table
-      mat-table
-      [dataSource]="courses"
-      class="mat-elevation-z8"
-      aria-label="Tabela de cursos"
-    >
-      <!-- ID Column -->
-      <ng-container matColumnDef="_id">
-        <th mat-header-cell *matHeaderCellDef>ID</th>
-        <td mat-cell *matCellDef="let course">{{ course._id }}</td>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Nome</th>
-        <td mat-cell *matCellDef="let course">{{ course.name }}</td>
-      </ng-container>
-
-      <!-- Category Column -->
-      <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef>Categoria</th>
-        <td mat-cell *matCellDef="let course">
-          <div class="category-row">
-          {{ course.category }}
-          <mat-icon aria-hidden="false" aria-label="Categoria do curso" style="margin-left: 8px">
-            {{ course.category  | category }}
-          </mat-icon>
-        </div>
-        </td>
-      </ng-container>
-
-      <!-- Actions Column -->
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Ações</th>
-        <mat-header-cell *matHeaderCellDef>
-
-        </mat-header-cell>
-
-        <mat-cell *matCellDef="let course">
-          <button mat-icon-button style="color: black" aria-label="Editar informações do curso">
-            <mat-icon>edit</mat-icon>
-          </button>
-
-          <button mat-icon-button style="color: black" aria-label="Remover curso da lista">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-cell>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </div>
 
 
+    <app-courses-list
+      *ngIf="courses$ | async as courses; else loading"
+      [courses]="courses"
+    ></app-courses-list>
 
-  <!-- Caso os dados ainda não estiverem sido puxados para exibição, o Angular permite que um template -->
-  <!-- seja carregado no lugar, utilizando como id a variável que foi utilizada no else do ngIf. -->
-  <ng-template #loading>
-    <div class="spinner">
-    <mat-spinner></mat-spinner>
-  </div>
-  </ng-template>
-
+    <!-- Caso os dados ainda não estiverem sido puxados para exibição, o Angular permite que um template -->
+    <!-- seja carregado no lugar, utilizando como id a variável que foi utilizada no else do ngIf. -->
+    <ng-template #loading>
+      <div class="spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-template>
   </mat-card-content>
+
 </mat-card>
 
-
-<button (click)="onAdd()" class="add-course-button" mat-fab color="primary" aria-label="Adicionar um curso">
+<button
+  (click)="onAdd()"
+  class="add-course-button"
+  mat-fab
+  color="primary"
+  aria-label="Adicionar um curso"
+>
   <mat-icon>add</mat-icon>
 </button>
-

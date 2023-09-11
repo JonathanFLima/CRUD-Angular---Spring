@@ -15,7 +15,7 @@ export class CoursesComponent {
   // Também é possível inicializar a variável dentro do construtor com this.courses = []
   // O símbolo $ na variável indica que ela é um Observable.
   courses$: Observable<Course[]>;
-  displayedColumns = ['_id', 'name', 'category', 'actions'];
+  displayedColumns = ['name', 'category', 'actions'];
 
   // Construtor inicializa a variável coursesService com um serviço importado, onde
   // ocorrerá a leitura dos dados.
@@ -40,6 +40,6 @@ export class CoursesComponent {
   }
 
   onAdd() {
-    this.router.navigate(['new'], {relativeTo: this.route}) // Muda a rota da página atual para courses/new | relativeTo + this.route adiciona a rota atual da página 
+    this.router.navigate(['new'], {relativeTo: this.route}) // Muda a rota da página atual para courses/new | relativeTo + this.route adiciona a rota atual da página
   }
 }
