@@ -11,6 +11,9 @@
     <app-courses-list
       *ngIf="courses$ | async as courses; else loading"
       [courses]="courses"
+      (edit)="onEdit($event)"
+      (add)="onAdd()"
+
     ></app-courses-list>
 
     <!-- Caso os dados ainda não estiverem sido puxados para exibição, o Angular permite que um template -->

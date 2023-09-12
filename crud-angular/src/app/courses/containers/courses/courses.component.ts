@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { Course } from '../model/course';
-import { CoursesCrudService } from '../services/courses-crud.service';
+import { Course } from '../../model/course';
+import { CoursesCrudService } from '../../services/courses-crud.service';
 import { Observable, catchError, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-courses',
@@ -40,6 +41,11 @@ export class CoursesComponent {
   }
 
   onAdd() {
-    this.router.navigate(['new'], {relativeTo: this.route}) // Muda a rota da página atual para courses/new | relativeTo + this.route adiciona a rota atual da página
+    this.router.navigate(['new'], {relativeTo: this.route})
+    // Muda a rota da página atual para courses/new | relativeTo + this.route adiciona a rota atual da página
+  }
+
+  onEdit(course: Course) {
+    this.router.navigate(['edit', course._id], {relativeTo: this.route})
   }
 }
