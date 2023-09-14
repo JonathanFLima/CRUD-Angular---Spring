@@ -13,7 +13,7 @@
 // };
 
 import { Injectable } from '@angular/core';
-import { Router, Resolve,
+import { Resolve,
          RouterStateSnapshot,
          ActivatedRouteSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -29,7 +29,9 @@ export class CourseResolver implements Resolve<Course> {
   constructor(private service: CoursesCrudService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Course> {
-    if ((route.params) && (route.params['id'])) {
+    if (route?.params['id']) {
+      // antes tava (route.params && route.params['id'])
+      // deixando 'route?' ele já checa se existe rota
       return this.service.loadById(route.params['id']);
     }
     return of({_id: '', name: '', category: ''});

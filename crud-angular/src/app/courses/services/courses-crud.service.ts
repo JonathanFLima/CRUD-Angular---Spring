@@ -1,29 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Course } from '../model/course';
-import { delay, first, tap } from 'rxjs';
+import { delay, first } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CoursesCrudService {
-
   // Verificar o CORS para permitir a leitura da API de domínio diferente
   // Usa-se um proxy para "igualar" os domínios
   // Ver o arquivo proxy.conf.js
 
   private readonly API = 'api/courses';
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient) {}
 
-    }
-
-    // O uso do método GET com o parâmetro array de Cursos passado gera um Observable.
+  // O uso do método GET com o parâmetro array de Cursos passado gera um Observable.
   list() {
     return this.httpClient.get<Course[]>(this.API).pipe(
       first(),
-      delay(500),
-      tap(courses => console.log(courses))
+      delay(500)
     );
   }
 
@@ -32,7 +28,22 @@ export class CoursesCrudService {
   }
 
   save(record: Partial<Course>) {
+    //console.log(record);
+    if (record._id) {
+      //console.log('update');
+      return this.update(record);
+    }
+    //console.log('create');
+    return this.create(record);
+  }
+
+  private create(record: Partial<Course>) {
     return this.httpClient.post<Course>(this.API, record).pipe(first());
   }
 
+  private update(record: Partial<Course>) {
+    return this.httpClient
+      .put<Course>(`${this.API}/${record._id}`, record)
+      .pipe(first());
+  }
 }
