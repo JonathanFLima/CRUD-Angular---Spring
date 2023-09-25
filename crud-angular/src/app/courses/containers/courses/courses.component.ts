@@ -5,6 +5,8 @@ import { Observable, catchError, of } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -15,7 +17,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CoursesComponent {
   // Também é possível inicializar a variável dentro do construtor com this.courses = []
   // O símbolo $ na variável indica que ela é um Observable.
-  courses$: Observable<Course[]>;
+  courses$: Observable<Course[]> | null = null;
   displayedColumns = ['name', 'category', 'actions'];
 
   // Construtor inicializa a variável coursesService com um serviço importado, onde
@@ -24,8 +26,13 @@ export class CoursesComponent {
     private coursesService: CoursesCrudService,
     private router: Router,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar,
   ) {
+    this.refreshContent();
+  }
+
+  refreshContent() {
     this.courses$ = this.coursesService.list().pipe(
       catchError((error) => {
         this.onError('Erro ao carregar os cursos disponíveis.');
@@ -48,4 +55,29 @@ export class CoursesComponent {
   onEdit(course: Course) {
     this.router.navigate(['edit', course._id], {relativeTo: this.route})
   }
-}
+
+  onDelete(course: Course) {
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        data: 'Tem certeza que deseja remover este curso?',
+      });
+
+      dialogRef.afterClosed().subscribe((result: boolean) => {
+        if (result) {
+        this.coursesService.delete(course._id).subscribe(
+          () => {
+            this.refreshContent();
+            this.snackBar.open("Curso removido com sucesso!", '', {
+              duration: 2000,
+              verticalPosition: 'top',
+              horizontalPosition: 'center',
+              panelClass: ['on-success-snackbar']
+            })
+          },
+
+          () => this.onError("Erro ao deletar o curso!")
+        );
+        }
+      });
+    }
+  }
+

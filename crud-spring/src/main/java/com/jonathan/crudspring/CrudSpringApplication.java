@@ -27,19 +27,19 @@ public class CrudSpringApplication {
 			);
 			Course c1 = new Course();
 			c1.setName("Angular + Spring");
-			c1.setCategory("front-end");
+			c1.setCategory("Front-end");
 
 			Course c2 = new Course();
 			c2.setName("Angular");
-			c2.setCategory("front-end");
+			c2.setCategory("Front-end");
 
 			Course c3 = new Course();
 			c3.setName("Angular.JS");
-			c3.setCategory("back-end");
+			c3.setCategory("Back-end");
 
 			Course c4 = new Course();
-			c4.setName("Java");
-			c4.setCategory("back-end");
+			c4.setName("JavaScript");
+			c4.setCategory("Front-end");
 
 			courseRepository.save(c1);
 			courseRepository.save(c2);

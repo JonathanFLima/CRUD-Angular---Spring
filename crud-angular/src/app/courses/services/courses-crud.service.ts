@@ -17,10 +17,7 @@ export class CoursesCrudService {
 
   // O uso do método GET com o parâmetro array de Cursos passado gera um Observable.
   list() {
-    return this.httpClient.get<Course[]>(this.API).pipe(
-      first(),
-      delay(500)
-    );
+    return this.httpClient.get<Course[]>(this.API).pipe(first(), delay(500));
   }
 
   loadById(id: string) {
@@ -45,5 +42,11 @@ export class CoursesCrudService {
     return this.httpClient
       .put<Course>(`${this.API}/${record._id}`, record)
       .pipe(first());
+  }
+
+  delete(id: string) {
+    console.log(id);
+    return this.httpClient.delete(`${this.API}/${id}`)
+    .pipe(first());
   }
 }
